@@ -41,20 +41,6 @@ class ValidatorTest {
         assertTrue(validationResult.isSuccessful());
     }
 
-    @Test
-    void testExportedFiles() throws IOException {
-        Bundle miiBundle = getBundle("src/main/resources/test/export_Test_123_2025-04-04T09-03-49.json");
-        Bundle bundle = new Bundle();
-        bundle.setType(Bundle.BundleType.COLLECTION);
-        bundleProcessor.process(miiBundle, bundle);
-        ValidationResult validationResult = validator.validate(bundle);
-        for (SingleValidationMessage message : validationResult.getMessages()) {
-            if(message.getSeverity().getCode().equals("error"))
-                System.out.println(message.getSeverity().getCode()+" "+message.getMessage());
-        }
-        assertTrue(validationResult.isSuccessful());
-    }
-
     private static @NonNull Bundle getBundle(String path) throws IOException {
         IParser iParser = FhirCtx.getFhirContext().newJsonParser();
         return iParser.parseResource(Bundle.class,

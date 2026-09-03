@@ -1,0 +1,603 @@
+{
+  "resourceType": "Bundle",
+  "id": "mii-exa-base-test-data-bundle-expanded",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Patient/mii-exa-person-patient-pseudonymisiert",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "mii-exa-person-patient-pseudonymisiert",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/PatientPseudonymisiert|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                  "code": "PSEUDED"
+                }
+              ]
+            },
+            "system": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym",
+            "value": "1234567890"
+          },
+          {
+            "use": "official",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://fhir.de/CodeSystem/identifier-type-de-basis",
+                  "code": "KVZ10"
+                }
+              ]
+            },
+            "system": "http://fhir.de/sid/gkv/kvid-10",
+            "_value": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                  "valueCode": "masked"
+                }
+              ]
+            },
+            "assigner": {
+              "identifier": {
+                "use": "official",
+                "system": "http://fhir.de/sid/arge-ik/iknr",
+                "value": "260326822"
+              }
+            }
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1998",
+        "address": [
+          {
+            "type": "both",
+            "postalCode": "10",
+            "country": "DE"
+          }
+        ]
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Organization/mii-exa-organization-uk-example",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "mii-exa-organization-uk-example",
+        "meta": {
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "http://fhir.de/sid/arge-ik/iknr",
+            "value": "260326822"
+          }
+        ],
+        "name": "Universitätsklinikum Beispiel"
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Practitioner/mii-exa-practitioner-example",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "mii-exa-practitioner-example",
+        "meta": {
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://www.medizininformatik-initiative.de/fhir/sid/practitioner-id",
+            "value": "prac-001"
+          }
+        ],
+        "name": [
+          {
+            "family": "Beispielarzt",
+            "given": [
+              "Max"
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Encounter/mii-exa-fall-kontakt-in-progress-status",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "mii-exa-fall-kontakt-in-progress-status",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "VN"
+                }
+              ]
+            },
+            "system": "https://www.medizininformatik-initiative.de/fhir/sid/encounter-id",
+            "value": "enc-001"
+          }
+        ],
+        "status": "in-progress",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "IMP",
+          "display": "inpatient encounter"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://fhir.de/CodeSystem/Kontaktebene",
+                "code": "abteilungskontakt"
+              }
+            ]
+          }
+        ],
+        "serviceType": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dkgev/Fachabteilungsschluessel-erweitert",
+              "code": "2315",
+              "display": "Orthopädie/Schwerpunkt Chirurgie"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "serviceProvider": {
+          "reference": "Organization/mii-exa-organization-uk-example"
+        },
+        "period": {
+          "start": "2024-06-14"
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Condition/mii-exa-diagnose-pneumonie",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "mii-exa-diagnose-pneumonie",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+              "version": "2025",
+              "code": "J18.9",
+              "display": "Pneumonie, nicht näher bezeichnet"
+            }
+          ],
+          "text": "Pneumonie, nicht näher bezeichnet"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "encounter": {
+          "reference": "Encounter/mii-exa-fall-kontakt-in-progress-status"
+        },
+        "onsetDateTime": "2024-06-14T08:00:00+02:00",
+        "recordedDate": "2024-06-14T10:00:00+02:00",
+        "asserter": {
+          "reference": "Practitioner/mii-exa-practitioner-example"
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Procedure/mii-exa-prozedur-appendektomie",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "mii-exa-prozedur-appendektomie",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Prozedur|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/bfarm/ops",
+              "version": "2025",
+              "code": "5-470",
+              "display": "Appendektomie"
+            }
+          ],
+          "text": "Appendektomie"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "encounter": {
+          "reference": "Encounter/mii-exa-fall-kontakt-in-progress-status"
+        },
+        "performedDateTime": "2024-06-15T09:00:00+02:00",
+        "performer": [
+          {
+            "actor": {
+              "reference": "Practitioner/mii-exa-practitioner-example"
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Specimen/mii-exa-labor-specimen-blut",
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "mii-exa-labor-specimen-blut",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/Specimen|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "available",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "119297000",
+              "display": "Blood specimen"
+            }
+          ],
+          "text": "Blutprobe"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "collection": {
+          "collectedDateTime": "2024-06-14T09:00:00+02:00"
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Observation/mii-exa-labor-haemoglobin",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "mii-exa-labor-haemoglobin",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/Laboruntersuchung|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7",
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ],
+          "text": "Hämoglobin"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "encounter": {
+          "reference": "Encounter/mii-exa-fall-kontakt-in-progress-status"
+        },
+        "effectiveDateTime": "2024-06-14T09:30:00+02:00",
+        "issued": "2024-06-14T10:00:00+02:00",
+        "performer": [
+          {
+            "reference": "Organization/mii-exa-organization-uk-example"
+          }
+        ],
+        "valueQuantity": {
+          "value": 13.5,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "specimen": {
+          "reference": "Specimen/mii-exa-labor-specimen-blut"
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Medication/mii-exa-medikation-amoxicillin",
+      "resource": {
+        "resourceType": "Medication",
+        "id": "mii-exa-medikation-amoxicillin",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/Medication|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/ifa/pzn",
+              "code": "12345678",
+              "display": "Amoxicillin Beispielpräparat"
+            }
+          ],
+          "text": "Amoxicillin"
+        },
+        "status": "active",
+        "form": {
+          "coding": [
+            {
+              "system": "http://standardterms.edqm.eu",
+              "code": "10219000",
+              "display": "Tablet"
+            }
+          ]
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/MedicationStatement/mii-exa-medikation-statement-amoxicillin",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "mii-exa-medikation-statement-amoxicillin",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/MedicationStatement|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "active",
+        "medicationReference": {
+          "reference": "Medication/mii-exa-medikation-amoxicillin"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "context": {
+          "reference": "Encounter/mii-exa-fall-kontakt-in-progress-status"
+        },
+        "effectivePeriod": {
+          "start": "2024-06-14",
+          "end": "2024-06-20"
+        },
+        "dateAsserted": "2024-06-14",
+        "informationSource": {
+          "reference": "Practitioner/mii-exa-practitioner-example"
+        },
+        "dosage": [
+          {
+            "text": "1 Tablette dreimal täglich"
+          }
+        ]
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/MedicationAdministration/mii-exa-medikation-administration-amoxicillin",
+      "resource": {
+        "resourceType": "MedicationAdministration",
+        "id": "mii-exa-medikation-administration-amoxicillin",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/MedicationAdministration|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "completed",
+        "medicationReference": {
+          "reference": "Medication/mii-exa-medikation-amoxicillin"
+        },
+        "subject": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "context": {
+          "reference": "Encounter/mii-exa-fall-kontakt-in-progress-status"
+        },
+        "effectiveDateTime": "2024-06-14T12:00:00+02:00",
+        "performer": [
+          {
+            "actor": {
+              "reference": "Practitioner/mii-exa-practitioner-example"
+            }
+          }
+        ],
+        "dosage": {
+          "text": "1 Tablette",
+          "dose": {
+            "value": 1,
+            "unit": "tablet",
+            "system": "http://unitsofmeasure.org",
+            "code": "{tbl}"
+          }
+        }
+      }
+    },
+
+    {
+      "fullUrl": "https://www.medizininformatik-initiative.de/Consent/mii-exa-consent-example",
+      "resource": {
+        "resourceType": "Consent",
+        "id": "mii-exa-consent-example",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-consent/StructureDefinition/Consent|2026.0.1"
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "active",
+        "scope": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/consentscope",
+              "code": "research",
+              "display": "Research"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "57016-8",
+                "display": "Privacy policy acknowledgement Document"
+              }
+            ]
+          }
+        ],
+        "patient": {
+          "reference": "https://www.medizininformatik-initiative.de/fhir/sid/pseudonym/1234567890"
+        },
+        "dateTime": "2024-06-14T08:00:00+02:00",
+        "organization": [
+          {
+            "reference": "Organization/mii-exa-organization-uk-example"
+          }
+        ],
+        "provision": {
+          "type": "permit",
+          "period": {
+            "start": "2024-06-14"
+          }
+        }
+      }
+    }
+  ]
+}

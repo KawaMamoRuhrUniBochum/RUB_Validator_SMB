@@ -8,6 +8,7 @@ import org.example.parser.Parser;
 import org.example.pdf.PdfGenerator;
 import org.example.pdf.Report;
 import org.example.validator.Validator;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -68,17 +69,17 @@ public class FileProcessorRoute extends RouteBuilder {
                     String fileContent = exchange.getIn().getBody(String.class);
 
                     Parser parser = new Parser(validator);
-                    Bundle processBundle = parser.parseBundle(fileContent);
+                    IBaseResource iBaseResource = parser.parseResource(fileContent);
 
                     long startTime = System.currentTimeMillis();
-                    ValidationResult result = validator.validate(processBundle);
+                    ValidationResult result = validator.validate(iBaseResource);
                     long endTime = System.currentTimeMillis();
                     long validationDurationMs = endTime - startTime;
 
                     String fileNameWithoutExt = FileNameExtractor.getFileNameWithoutExt(exchange);
 
                     // Serialize the processed bundle back to JSON
-                    String processedBundleJson = parser.encodeResourceToString(processBundle);
+                    String processedBundleJson = parser.encodeResourceToString(iBaseResource);
 
                     // Generate the PDF report
                     Report report = new Report(result, parser.getResourceCounter(), validationDurationMs);

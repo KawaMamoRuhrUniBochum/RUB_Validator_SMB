@@ -10,6 +10,7 @@ public class NpmPackageLoader {
     public void loadAllTgzPackagesFromClasspath(NpmPackageValidationSupport npmSupport) {
 
         try {
+            npmSupport.loadPackageFromClasspath("packages/basicPackages/hl7.fhir.uv.xver-r5.r4-0.1.0.tgz");
             npmSupport.loadPackageFromClasspath("packages/basicPackages/hl7.fhir.r4.core-4.0.1.tgz");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -23,6 +24,7 @@ public class NpmPackageLoader {
             for (Resource resource : resources) {
                 // Get the filename or the relative classpath location
                 String filename = resource.getFilename();
+                System.out.println("loadAllTgzPackagesFromClasspath "+filename);
                 if (filename != null) {
                     npmSupport.loadPackageFromClasspath(resource.getFilePath().getParent().getFileName()+"/"+filename);
                 }

@@ -81,7 +81,7 @@ public class BundleProcessor {
             if(Objects.isNull(resourceCounter.get(resourceType))){
                 resourceCounter.put(resourceType, new ResourceStatistics(1L, percentage, coverageResult.missingPaths()));
             }else {
-                resourceCounter.get(resourceType).missingPaths().addAll(coverageResult.missingPaths());
+                //resourceCounter.get(resourceType).missingPaths().addAll(coverageResult.missingPaths());
                 resourceCounter.put(resourceType,
                         new ResourceStatistics(resourceCounter.get(resourceType).counter()+1,
                                 (resourceCounter.get(resourceType).counter()*resourceCounter.get(resourceType).percentage()+percentage)/(resourceCounter.get(resourceType).counter()+1),

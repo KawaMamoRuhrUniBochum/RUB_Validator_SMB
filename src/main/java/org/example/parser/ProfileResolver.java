@@ -20,9 +20,9 @@ public class ProfileResolver {
         String prefix = "https://www.medizininformatik-initiative.de/fhir/core/";
 
         profiles.put("Patient", prefix+"modul-person/StructureDefinition/PatientPseudonymisiert|2026.0.1");
-        profiles.put("Procedure", prefix+"modul-prozedur/StructureDefinition/Procedure|2025.0.1");
+        profiles.put("Procedure", prefix+"modul-prozedur/StructureDefinition/Procedure|2026.0.1");
         profiles.put("Encounter", prefix+"modul-fall/StructureDefinition/KontaktGesundheitseinrichtung|2026.0.1");
-        profiles.put("Condition", prefix+"modul-diagnose/StructureDefinition/Diagnose|2025.0.1");
+        profiles.put("Condition", prefix+"modul-diagnose/StructureDefinition/Diagnose|2026.0.1");
         profiles.put("MedicationStatement", prefix+"modul-medikation/StructureDefinition/MedicationStatement|2026.0.1");
         profiles.put("Medication", prefix+"modul-medikation/StructureDefinition/Medication|2026.0.1");
         profiles.put("List", prefix+"modul-medikation/StructureDefinition/medikationsliste|2026.0.1");

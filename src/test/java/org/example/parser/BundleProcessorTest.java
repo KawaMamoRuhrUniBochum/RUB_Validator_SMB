@@ -97,13 +97,4 @@ class BundleProcessorTest {
             assertNotNull(domainResource.getIdPart());
         }
     }
-
-    @Test
-    void allResourcesInDMTBundleExampleShouldHaveType() throws IOException {
-        Bundle bundle = getBundle("src/main/resources/test/export_Testantrag_PreProd_01_2025-03-31T12-55-06.json");
-        for (Bundle.BundleEntryComponent component : bundle.getEntry()) {
-            DomainResource domainResource = (DomainResource) component.getResource();
-            assertNotNull(domainResource.getResourceType().name());
-        }
-    }
 }

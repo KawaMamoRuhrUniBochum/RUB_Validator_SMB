@@ -44,6 +44,12 @@ public class Parser {
         return generatedBundle;
     }
 
+    public IBaseResource parseResource(String fileContent){
+        IBaseResource iBaseResource = iParser.parseResource(fileContent);
+        if(iBaseResource instanceof Bundle bundle)
+            return processBundle(bundle);
+        return iBaseResource;
+    }
     public Bundle parseBundle(String fileContent){
         try {
             Bundle bundle = iParser.parseResource(Bundle.class, fileContent);

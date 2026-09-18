@@ -4,7 +4,6 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.context.support.IValidationSupport;
 import ca.uhn.fhir.validation.FhirValidator;
-import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
 import jakarta.annotation.PostConstruct;
 import org.example.bean.AppProperties;
@@ -13,8 +12,6 @@ import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class Validator {
@@ -45,7 +42,6 @@ public class Validator {
         NpmPackageValidationSupport npmSupport = new NpmPackageValidationSupport(fhirContext);
         NpmPackageLoader npmPackageLoader = new NpmPackageLoader();
         npmPackageLoader.loadAllTgzPackagesFromClasspath(npmSupport);
-
         ValidationSupportChain chain = getSupportChain(npmSupport, populatedValidationSupport);
         FhirInstanceValidator instanceValidator = new FhirInstanceValidator(chain);
 
@@ -69,12 +65,7 @@ public class Validator {
     }
 
     public ValidationResult validate(IBaseResource resource){
-        ValidationResult validationResult = fhirValidator.validateWithResult(resource);
-        /*List<SingleValidationMessage> collect = validationResult.getMessages().stream()
-                .filter(msg -> !msg.getMessage().contains("http://hl7.org/fhir/5.0")).
-                toList();
-        return new ValidationResult(fhirContext, collect);*/
-        return validationResult;
+        return fhirValidator.validateWithResult(resource);
     }
 
     public IValidationSupport getValidationSupportChain() {

@@ -3,6 +3,7 @@ package org.example.validator;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.context.support.IValidationSupport;
+import ca.uhn.fhir.i18n.HapiLocalizer;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ValidationResult;
 import jakarta.annotation.PostConstruct;
@@ -12,6 +13,8 @@ import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
+
+import java.util.Locale;
 
 @Component
 public class Validator {
@@ -47,6 +50,7 @@ public class Validator {
 
         fhirValidator = fhirContext.newValidator();
         fhirValidator.registerValidatorModule(instanceValidator);
+
 
     }
 

@@ -42,7 +42,7 @@ public class NpmPackageLoader {
             for (Resource resource : resources) {
                 // Get the filename or the relative classpath location
                 String filename = resource.getFilename();
-                System.out.println("loadAllTgzPackagesFromClasspath "+filename);
+                //System.out.println("loadAllTgzPackagesFromClasspath "+filename);
                 if (filename != null) {
                     npmSupport.loadPackageFromClasspath(resource.getFilePath().getParent().getFileName()+"/"+filename);
                 }

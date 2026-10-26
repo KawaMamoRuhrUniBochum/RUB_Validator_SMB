@@ -41,14 +41,31 @@ public class BundleProcessor {
             Resource resource = component.getResource();
             String resourceType = resource.getResourceType().name();
 
-            String profileUrl;
+            String profileUrl = null;
 
             if(resource.getMeta().getProfile().isEmpty()) {
-                profileUrl = profileResolver.addProfile(resource);
-                appliedProcessing.add(new Report.AppliedProcessing(
+
+                DomainResource domainResource = (DomainResource) resource;
+                List<Extension> extensions = domainResource.getExtension();
+                for (Extension extension : extensions) {
+                    if (extension.getUrl().equals("https://hip.vitagroup.ag/fhir/extension/candidate-profile/")) {
+                        CanonicalType canonicalType = (CanonicalType) extension.getValue();
+                        profileUrl = canonicalType.getValue();
+                        appliedProcessing.add(new Report.AppliedProcessing(
                                 resourceType,
-                                "Profile wurde basierend auf dem Ressourcentyp hinzugefügt",
-                        "meta.profile"));
+                                "Profile wurde basierend auf dem Extension hinzugefügt",
+                                "meta.profile"));
+                    }
+                }
+
+                if(Objects.isNull(profileUrl)) {
+                    profileUrl = profileResolver.addProfile(resource);
+                    appliedProcessing.add(new Report.AppliedProcessing(
+                            resourceType,
+                            "Profile wurde basierend auf dem Ressourcentyp hinzugefügt"+profileUrl,
+                            "meta.profile"));
+                }
+
             }else if(resource.getResourceType().equals(ResourceType.Patient)) {
                 profileUrl = profileResolver.setProfile((Patient) resource);
                 appliedProcessing.add(new Report.AppliedProcessing(

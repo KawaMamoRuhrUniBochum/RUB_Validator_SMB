@@ -115,7 +115,17 @@ public class FileProcessorRoute extends RouteBuilder {
                         + "?username={{smb.username}}"
                         + "&password={{smb.password}}")
                 .otherwise()
-                .log("Resource is invalid. Skipping writing bundle to valid data folder.")
+                    .process(exchange -> {
+                        String bundleJson = exchange.getProperty("ProcessedBundleJson", String.class);
+                        String baseName = exchange.getProperty("BaseFileName", String.class);
+
+                        exchange.getMessage().setBody(bundleJson);
+                        exchange.getMessage().setHeader("CamelFileName", "Invalid_" + baseName + ".json");
+                    })
+                    .log("Writing invalid processed JSON bundle to invalid data SMB path: ${header.CamelFileName}")
+                    .to("smb:{{smb.host}}:{{smb.port}}/{{smb.share}}/{{smb.invalidDatPath}}"
+                            + "?username={{smb.username}}"
+                            + "&password={{smb.password}}")
                 .end()
 
                 // Step 2: Always write the PDF report

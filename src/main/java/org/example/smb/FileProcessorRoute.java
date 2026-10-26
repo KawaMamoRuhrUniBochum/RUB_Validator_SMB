@@ -3,6 +3,7 @@ package org.example.smb;
 import ca.uhn.fhir.validation.ValidationResult;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.example.PII.PiiExtractor;
 import org.example.config.ProcessingException;
 import org.example.parser.Parser;
 import org.example.pdf.PdfGenerator;
@@ -13,6 +14,7 @@ import org.hl7.fhir.r4.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Objects;
 
 @Component
@@ -60,7 +62,7 @@ public class FileProcessorRoute extends RouteBuilder {
         from("smb:{{smb.host}}:{{smb.port}}/{{smb.share}}/{{smb.path}}"
                 + "?username={{smb.username}}"
                 + "&password={{smb.password}}"
-                + "&delay=10000"
+                + "&delay=10000&recursive=true"
                 + "&delete=false"
                 + "&move=.done/${file:name}")
                 .routeId("smb-file-poller")
@@ -73,6 +75,9 @@ public class FileProcessorRoute extends RouteBuilder {
 
                     long startTime = System.currentTimeMillis();
                     ValidationResult result = validator.validate(iBaseResource);
+                    // check for PII data
+                    HashSet<String> pii = PiiExtractor.extractEntities(parser.encodeResourceToString(iBaseResource));
+
                     long endTime = System.currentTimeMillis();
                     long validationDurationMs = endTime - startTime;
 
@@ -80,7 +85,7 @@ public class FileProcessorRoute extends RouteBuilder {
 
                     // Serialize the processed bundle back to JSON
                     String processedBundleJson = parser.encodeResourceToString(iBaseResource);
-
+                    parser.getBundleProcessor().appliedProcessing.add(new Report.AppliedProcessing("gefunden", "personenbezogene Identifikationsdaten", String.join(", ", pii)));
                     // Generate the PDF report
                     Report report = new Report(result, parser.getResourceCounter(), validationDurationMs);
                     if(Objects.nonNull(parser.getBundleProcessor().appliedProcessing))
